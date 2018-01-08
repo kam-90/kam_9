@@ -1,0 +1,41 @@
+First of all.
+Let me explain you how the express static works.
+And how express works in general.
+It reads your app.use commands line by line, top to bottom, and executes them in that order.
+
+So if you for example declare app.use(express.static(path.join(__dirname, 'public')));
+it will just serve ALL files inside that folder as if you serve them from the server root.
+
+So when user goes to herokuapp.com/index.html (which is same as herokuapp.com/ by convention) - first express looks into
+public folder. You choose the name. YOu can do app.use(express.static('dog_owner') and then of course you should have a folder called dog_owner
+
+So now when user goes to herokuapp.com/dogs.html - express looks into dog_owner (public) folder. If it finds a file called dogs.html - it returns the file to the user.
+
+Same with herokuapp.com/assets/bitcoin_miner.js
+It will look into public/assets/bitcoin_miner.js
+
+CLEAR.
+
+Now what changed to work with HEROKU.
+1. https://devcenter.heroku.com/articles/nodejs-support#runtime-behavior
+changed package.json and add info for start script.
+I also added Procfile but it is redundant.
+2. I had to specify the port instead of hardcoded 3000.
+HEROKU uses randomly generated ports inside so we can't assign port like 80 or 3000. We have to set what's in process.env.PORT.
+It usually is soemthing like 44357 or 35899 on HEROKU.
+
+app.listen(app.get('port'), function () {
+  console.log(`Example app listening on port ${app.get('port')}!`);
+});
+
+3. I removed redundant files.
+
+What you also can do: indicate node and npm versions. Not needed for now.
+Check here: https://devcenter.heroku.com/articles/nodejs-support#specifying-a-node-js-version
+
+How to deploy?
+Place all files into the folder where you have the git and heroku project.
+git add .
+git commit -m "new app"
+git push heroku master
+That's all!

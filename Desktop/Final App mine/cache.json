@@ -1,0 +1,58 @@
+{
+  "posts": [
+    {
+      "heading": "CSS",
+      "description": "CSS WRITING ",
+      "source_code": "body {\n  padding-top: 54px;\n}\n\n@media (min-width: 992px) {\n  body {\n    padding-top: 56px;\n  }\n}\n\n.carousel-item {\n  height: 65vh;\n  min-height: 300px;\n  background: no-repeat center center scroll;\n  -webkit-background-size: cover;\n  -moz-background-size: cover;\n  -o-background-size: cover;\n  background-size: cover;\n}\n\n.portfolio-item {\n  margin-bottom: 30px;\n}",
+      "source_code_lang": "css"
+    },
+    {
+      "heading": "Angular getting started",
+      "description": "How to getting started with html",
+      "source_code": "<div *ngFor=\"let post of posts; index as i\">\n<h1>Item number {{i}}</h1>\n<pre>{{post | json}}</pre>\n<pre><code \nmwlHighlightJs [source]=\"post.source_code\" \n[language]=\"post.source_code_lang\"\n>\n</code></pre>\n</div>",
+      "source_code_lang": "javascript"
+    },
+    {
+      "heading": "PHP",
+      "description": "getting started with php",
+      "source_code": "<?php\n $scope=\"alpha\";\n?>",
+      "source_code_lang": "php"
+    },
+    {
+      "heading": "how to make component",
+      "description": "Components are important feature of angular. And can be used to develop web apps using many components",
+      "source_code": "import { Component, OnInit } from '@angular/core';\nimport { PostsService } from '../posts.service';\nimport { BsModalService } from 'ngx-bootstrap/modal';\nimport { BsModalRef } from 'ngx-bootstrap/modal';\n\n@Component({\n  \n  templateUrl: './home.component.html',\n  styleUrls: ['./home.component.css']\n})\nexport class HomeComponent implements OnInit {\n  currentModal;\n  modalRef: BsModalRef;\n  public posts;\n  \n  constructor(public postsService: PostsService,private modalService: BsModalService) { }\n\n  ngOnInit() {\n    this.postsService.getPosts()\n      \n.subscribe((posts) => this.posts = posts)\n\n  }\n\n  openModal(template: TemplateRef<any>, currentProject) {\n    this.currentModal = currentProject;\n    this.modalRef = this.modalService.show(template);\n  }\n\n\n}\n",
+      "source_code_lang": "typescript"
+    },
+    {
+      "heading": "How to create service in Typescript",
+      "description": "Service is essential when serving components to interact with other parts",
+      "source_code": "import { of } from 'rxjs/observable/of';\nimport { fromEvent } from 'rxjs/observable/fromevent';\nimport { catchError, map, tap } from 'rxjs/operators';\n\nconst httpOptions = {\n  headers: new HttpHeaders({ 'Content-Type': 'application/json' })\n};\n\n@Injectable()\nexport class PostsService {\n  private localStorageKey = \"posts\";\n  private postsUrl = 'http://localhost:3000/api/posts'; // change to '/api/posts'\n\n  constructor( private http: HttpClient ) { }\n\n  clear() {\n    localStorage.clear();\n  }\n}",
+      "source_code_lang": "typescript"
+    },
+    {
+      "heading": "How to inject service in component",
+      "description": "Service injection is crucial",
+      "source_code": "@Component({\n  selector: 'app-blogs',\n  templateUrl: './blogs.component.html',\n  styleUrls: ['./blogs.component.css']\n})\nexport class BlogsComponent implements OnInit {\n  submitted: boolean = false;\n  source: string;\n  programmingLanguages: string[] = ['typescript', 'javascript'];\n  usingLanguage: string = 'typescript';\n  heading: string = \"\";\n  description: string = \"\";\n\n  constructor(public postsService: PostsService) { }\n\n  update(event) {\n    this.source = event.target.textContent;\n  }",
+      "source_code_lang": "typescript"
+    },
+    {
+      "heading": "How to unset session in PHP",
+      "description": "Session are imp so you must unset them",
+      "source_code": "<?php\nsession_start();\n//echo'data session-'.$_SESSION['Id'];\nunset($_SESSION['Id']);\nunset($_SESSION['user_name']);\nunset($_SESSION['email']);\nunset($_SESSION['tk']);\nunset($_SESSION['ticketID']);\nunset($_SESSION['total_fare']);\nsession_destroy();\n\nheader(\"location: home.php\");\n\n?>",
+      "source_code_lang": "typescript"
+    },
+    {
+      "heading": "How to get Form data in PHP",
+      "description": "$_POST is essential to get data posted from web",
+      "source_code": "$_location=$_POST['loc'];\n                $_destination=$_POST['des'];\n                $_trip=$_POST['optradio'];\n                $_depart_date=$_POST['depart'];\n                $_return_date=$_POST['arrival'];\n                $_adults=$_POST['adults'];\n                $_children=$_POST['children'];\n                $_seat=$_POST['class'];\n                 \n                $loc=explode('-', $_location);\n                $dest=explode('-',$_destination);",
+      "source_code_lang": "php"
+    },
+    {
+      "heading": "DATABASE PHP",
+      "description": "hey",
+      "source_code": "<?php\n    $dsn = 'mysql:host=localhost;dbname=ticket_reservation';\n    $username = 'root';\n    $password = '';\n\n    try {\n        $db = new PDO($dsn, $username, $password);\n        //echo \"connected\";\n    } catch (PDOException $e) {\n        $error_message = $e->getMessage();\n        include('database_error.php');\n        exit();\n    }\n?>",
+      "source_code_lang": "php"
+    }
+  ]
+}
